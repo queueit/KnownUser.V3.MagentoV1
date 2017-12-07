@@ -1,0 +1,3 @@
+src/app/code/community/Queueit/Knownuser     app/code/community/Queueit/Knownuser
+src/app/etc/modules/*    app/etc/modules/
+lib/Queueit/KnownUser lib/Queueit/KnownUser 

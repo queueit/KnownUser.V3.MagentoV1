@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Queueit_Knownuser>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends></depends>
+        </Queueit_Knownuser>
+    </modules>
+</config>

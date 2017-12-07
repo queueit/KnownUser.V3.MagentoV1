@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <all>
+            <title>Allow Everything</title>
+        </all>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <queueit_knownuser translate="title">
+                                        <title>QueueIt</title>
+                                    </queueit_knownuser>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

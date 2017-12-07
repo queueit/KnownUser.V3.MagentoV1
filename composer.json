@@ -1,0 +1,10 @@
+{
+    "name": "Queueit/Knownuser",
+    "license": "",
+    "type": "magento-module",
+    "description": "Using queueit known user to manage magento integration",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "queueit/knownuserv3": "^3.2"
+    }
+}
