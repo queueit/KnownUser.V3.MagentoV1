@@ -38,7 +38,7 @@ class Queueit_Knownuser_Model_Observer
     {
         $token = $request->getQuery('queueittoken', '');
         $integrationInfo = $this->getHelper()->getIntegrationinfo();
-        $session = Mage::getSingleton('core/session');
+   
 
         try {
             $fullUrl = $this->getCurrentUrl();
@@ -68,9 +68,6 @@ class Queueit_Knownuser_Model_Observer
                 // Redirect to url without token
                 // This is a valid token and should be allowed to update
                 $helper = Mage::helper('core/url');
-                $session = Mage::getSingleton('core/session');
-                $session->setQueueItTokenUpdateable(true);
-                $session->setQueueItToken($this->tempCookieValue);
                 $currentUrl = $helper->removeRequestParam($helper->getCurrentUrl(), 'queueittoken');
                 $action->getResponse()->setRedirect($currentUrl);
                 $request->setDispatched(true);
