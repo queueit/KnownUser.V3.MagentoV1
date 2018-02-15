@@ -6,13 +6,6 @@ Server side implementation of the QueueIT queueing system. This will put custome
 **FPC modules could prevent this module from working properly.**(Please contact queue-it for the practices of handling FPC scenario.)
 
 
-
-**Current version: 1.0.0**
-
-
-## 1.0.0
-- Initial module release
-
 # Installation
 How to install the module using different methods.
 
