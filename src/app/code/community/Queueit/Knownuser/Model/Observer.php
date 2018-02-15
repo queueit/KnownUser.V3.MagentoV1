@@ -38,7 +38,7 @@ class Queueit_Knownuser_Model_Observer
     {
         $token = $request->getQuery('queueittoken', '');
         $integrationInfo = $this->getHelper()->getIntegrationinfo();
-   
+
 
         try {
             $fullUrl = $this->getCurrentUrl();
@@ -54,7 +54,17 @@ class Queueit_Knownuser_Model_Observer
 
             if ($result->doRedirect()) {
                     $response = $action->getResponse();
-                    $response->setRedirect($result->redirectUrl);
+
+                    if(!$result->isAjaxResult)
+                    {
+                        $response->setRedirect($result->redirectUrl);
+                    }
+                    else
+                    {
+                        $response->setHeader('HTTP/1.0', 200, true);
+                        $response->setHeader($result->getAjaxQueueRedirectHeaderKey() , $result->getAjaxRedirectUrl());
+                    }
+                 
                     $response->setHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
                     $response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
                     $response->setHeader('Pragma', 'no-cache');
