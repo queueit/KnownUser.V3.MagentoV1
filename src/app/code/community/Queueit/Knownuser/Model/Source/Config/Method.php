@@ -8,11 +8,11 @@ class Queueit_Knownuser_Model_Source_Config_Method
 
     public function toOptionArray()
     {
-        $options = [
+        $options = array(
             self::PUSH => 'push',
             self::PULL => 'pull',
             self::MANUAL => 'manual'
-        ];
+        );
 
         return $options;
     }

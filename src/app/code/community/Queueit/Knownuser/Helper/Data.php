@@ -95,7 +95,7 @@ class Queueit_Knownuser_Helper_Data extends Mage_Core_Helper_Abstract
                 ->setOrder('id', Zend_Db_Select::SQL_DESC);
 
             $info = $collection->getFirstItem()->getInfo();
-            $app->saveCache($info, self::CACHE_KEY, [self::CACHE_TAG], self::CACHE_LIFETIME);
+            $app->saveCache($info, self::CACHE_KEY, array(self::CACHE_TAG), self::CACHE_LIFETIME);
         }
 
         return hex2bin($info);
@@ -106,6 +106,6 @@ class Queueit_Knownuser_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function cleanQueueitCache()
     {
-        Mage::app()->cleanCache([self::CACHE_TAG]);
+        Mage::app()->cleanCache(array(self::CACHE_TAG));
     }
 }
