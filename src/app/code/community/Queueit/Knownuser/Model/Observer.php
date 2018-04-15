@@ -74,7 +74,7 @@ class Queueit_Knownuser_Model_Observer
             }
 
 
-            if (!empty($token)) {
+            if (!empty($token) && !empty($result->actionType)) {
                 // Redirect to url without token
                 // This is a valid token and should be allowed to update
                 $helper = Mage::helper('core/url');
