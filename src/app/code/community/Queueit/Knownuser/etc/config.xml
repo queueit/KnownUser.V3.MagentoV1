@@ -67,15 +67,6 @@
                     </queueit_knownuser>
                 </observers>
             </controller_action_predispatch>
-            <checkout_onepage_controller_success_action>
-                <observers>
-                    <queueit_knownuser>
-                        <type>singleton</type>
-                        <class>queueit_knownuser/observer</class>
-                        <method>checkoutOnepageControllerSuccessAction</method>
-                    </queueit_knownuser>
-                </observers>
-            </checkout_onepage_controller_success_action>
         </events>
     </frontend>
     <crontab>
