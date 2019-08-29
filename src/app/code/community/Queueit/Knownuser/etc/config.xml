@@ -2,10 +2,10 @@
 <config>
     <modules>
         <Queueit_Knownuser>
-            <version>1.2.0</version>
+            <version>1.3.0</version>
         </Queueit_Knownuser>
     </modules>
-    <global>
+     <global>
         <blocks>
             <queueit_knownuser>
                 <class>Queueit_Knownuser_Block</class>
@@ -56,6 +56,13 @@
                     <module>Queueit_Knownuser</module>
                 </args>
             </knownuser>
+            <Queueit_Knownuser>
+                <use>standard</use>
+                <args>
+                    <module>Queueit_Knownuser</module>
+                    <frontName>Queueit_Knownuser</frontName>
+                </args>
+            </Queueit_Knownuser>
         </routers>
         <events>
             <controller_action_predispatch>
@@ -84,7 +91,7 @@
     <default>
         <queueit_knownuser>
             <general>
-                <secretkey backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secretkey backend_model="adminhtml/system_config_backend_encrypted" />
                 <update_config>0</update_config>
                 <update_cron>*/15 * * * *</update_cron>
                 <valid_post>#msp/.*#</valid_post>
@@ -92,4 +99,27 @@
             </general>
         </queueit_knownuser>
     </default>
+    <adminhtml>
+        <layout>
+            <updates>
+                <knownuser>
+                    <file>knownuser.xml</file>
+                </knownuser>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Queueit_Knownuser after="Mage_Adminhtml">Queueit_Knownuser</Queueit_Knownuser>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+ 
+
+
 </config>

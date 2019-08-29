@@ -1,10 +1,6 @@
 
-
 # Functionality
-
 Server side implementation of the QueueIT queueing system. This will put customers into a queue before they can enter the site.
-**FPC modules could prevent this module from working properly.**(Please contact queue-it for the practices of handling FPC scenario.)
-
 
 # Installation
 How to install the module using different methods.
@@ -55,7 +51,25 @@ In here
 - **How are the configs updated**: The way changes on QueueIT's side are requested
   - Push: Configure url in QueueIT. Postback url is `{{store_url}}/knownuser/integrationinfo/update`
   - Pull: This will pull in changes every x minutes (as defined in the cron schedule)
-  - Manual: Upload the config manually (Not finished/available atm)
+  - Manual: To Update configuration manually or to see the current configuration: `CMS -> QueueIt KnownUser -> Admin Configuration`. You can see the current config at this page and also upload confugartion file for updating it. 
+
+# FPC  (Protecting ajax calls on static pages)
+If you have Full Page Cache enabled you should add queue-it javascript to your pages as below :
+1) Make sure KnownUser code will not run on static pages (by ignoring those URLs in your integration configuration).
+2) Add below JavaScript tags to all static pages : 
+You can add this tag in the header files : `...app\design\frontend\rwd\default\template\page\html\header.phtml`
+
+```
+<script type="text/javascript" src="//static.queue-it.net/script/queueclient.min.js"></script>
+<script
+ data-queueit-intercept-domain="{YOUR_CURRENT_DOMAIN}"
+   data-queueit-intercept="true"
+  data-queueit-c="{YOUR_CUSTOMER_ID}"
+  type="text/javascript"
+  src="//static.queue-it.net/script/queueconfigloader.min.js">
+</script>
+```
+3) Add some triggers for your dynamic ajax calls you want to queue users on.
 
 # Tested on
 

@@ -3,7 +3,7 @@ require_once Mage::getBaseDir('lib') . DS . 'Queueit' . DS . 'KnownUser' . DS . 
 
 class Queueit_Knownuser_Model_Observer
 {
-	const MAGENTO_SDK_VERSION = "1.2.0";
+	const MAGENTO_SDK_VERSION = "1.3.0";
     /**
      * Temporary storage of the cookie value, easier for validation.
      *
@@ -29,7 +29,10 @@ class Queueit_Knownuser_Model_Observer
    
     }
 
-
+    private  function getPluginVersion()
+    {
+        return '&kupver=magento1_'.Queueit_Knownuser_Model_Observer::MAGENTO_SDK_VERSION;
+    }
 
     /**
      * @param Mage_Core_Controller_Request_Http $request
@@ -57,12 +60,12 @@ class Queueit_Knownuser_Model_Observer
                     $response = $action->getResponse();
                     if(!$result->isAjaxResult)
                     {
-                        $response->setRedirect($result->redirectUrl .'&mg1sdkver='.Queueit_Knownuser_Model_Observer::MAGENTO_SDK_VERSION);
+                        $response->setRedirect($result->redirectUrl. $this->getPluginVersion());
                     }
                     else
                     {
                         $response->setHeader('HTTP/1.0', 200, true);
-                        $response->setHeader($result->getAjaxQueueRedirectHeaderKey() , $result->getAjaxRedirectUrl(). urlencode('&mg1sdkver='.Queueit_Knownuser_Model_Observer::MAGENTO_SDK_VERSION));
+                        $response->setHeader($result->getAjaxQueueRedirectHeaderKey() , $result->getAjaxRedirectUrl(). urlencode($this->getPluginVersion()));
                     }
                  
                     $response->setHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');

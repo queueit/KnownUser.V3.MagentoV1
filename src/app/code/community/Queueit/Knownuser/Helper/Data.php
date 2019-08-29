@@ -1,5 +1,4 @@
 <?php
-
 class Queueit_Knownuser_Helper_Data extends Mage_Core_Helper_Abstract
 {
     /** Cache Tag */
@@ -99,6 +98,17 @@ class Queueit_Knownuser_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return hex2bin($info);
+    }
+
+    public function updateIntegrationInfo($integrationInfo, $hash)
+    {
+        if ($integrationInfo && $hash && $this->validateHash($integrationInfo, $hash)) {
+            Mage::getModel('queueit_knownuser/integrationinfo')
+                ->setInfo($integrationInfo)
+                ->save();
+            $this->cleanQueueitCache();
+            return;
+        }
     }
 
     /**

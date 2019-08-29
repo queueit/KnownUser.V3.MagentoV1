@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+    <menu>
+        <cms >
+            <children>
+                <Queueit>
+                    <title>QueueIt KnownUser</title>
+                    <sort_order>1000</sort_order>
+                    <children>
+                        <ConfigPage>
+                            <title>Admin Configuration</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/Knownuser/Index</action>
+                        </ConfigPage>
+                    </children>
+                </Queueit>
+            </children>
+        </cms>
+    </menu>
+
     <acl>
-        <all>
-            <title>Allow Everything</title>
-        </all>
         <resources>
             <admin>
                 <children>
+                    <cms >
+                        <children>
+                            <Queueit>
+                                <title>QueueIt KnownUser</title>
+                                <sort_order>1000</sort_order>
+                                <children>
+                                    <ConfigPage>
+                                        <title>Admin Configuration</title>           
+                                    </ConfigPage>
+                                </children>
+                            </Queueit>
+                        </children>
+                    </cms>
+
                     <system>
                         <children>
                             <config>
@@ -22,4 +51,4 @@
             </admin>
         </resources>
     </acl>
-</config>
+</config> 
