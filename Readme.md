@@ -6,7 +6,7 @@ Server side implementation of the QueueIT queueing system. This will put custome
 How to install the module using different methods.
 
 ## Manual
-Download the SDK source from the [Github sdk](https://github.com/queueit/KnownUser.V3.PHP) and place these files in `{magentoroot}/lib/Queueit`
+Download the SDK source from the [Github sdk](https://github.com/queueit/KnownUser.V3.PHP) and place these files in `{magentoroot}/lib/Queueit/KnownUser`
 Copy the files the src directory to the `{magentoroot}/`.
 
 Clear the magento caches and your module should be ready for configuration.
