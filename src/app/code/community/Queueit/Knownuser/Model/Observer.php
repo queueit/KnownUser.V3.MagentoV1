@@ -3,7 +3,7 @@ require_once Mage::getBaseDir('lib') . DS . 'Queueit' . DS . 'KnownUser' . DS . 
 
 class Queueit_Knownuser_Model_Observer
 {
-	const MAGENTO_SDK_VERSION = "1.3.0";
+	const MAGENTO_SDK_VERSION = "1.3.1";
     /**
      * Temporary storage of the cookie value, easier for validation.
      *
