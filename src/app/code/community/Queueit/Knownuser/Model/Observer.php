@@ -3,7 +3,7 @@ require_once Mage::getBaseDir('lib') . DS . 'Queueit' . DS . 'KnownUser' . DS . 
 
 class Queueit_Knownuser_Model_Observer
 {
-	const MAGENTO_SDK_VERSION = "1.3.1";
+	const MAGENTO_SDK_VERSION = "1.3.2";
     /**
      * Temporary storage of the cookie value, easier for validation.
      *
@@ -77,7 +77,7 @@ class Queueit_Knownuser_Model_Observer
             }
 
 
-            if (!empty($token) && !empty($result->actionType)) {
+            if (!empty($token) && $result->actionType == "Queue") {
                 // Redirect to url without token
                 // This is a valid token and should be allowed to update
                 $helper = Mage::helper('core/url');
