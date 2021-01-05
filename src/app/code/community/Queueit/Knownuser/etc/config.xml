@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Queueit_Knownuser>
-            <version>1.3.1</version>
+            <version>1.3.3</version>
         </Queueit_Knownuser>
     </modules>
      <global>
@@ -119,7 +119,7 @@
             </adminhtml>
         </routers>
     </admin>
- 
+
 
 
 </config>

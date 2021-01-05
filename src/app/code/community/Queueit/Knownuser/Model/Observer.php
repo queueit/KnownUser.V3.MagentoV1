@@ -3,7 +3,7 @@ require_once Mage::getBaseDir('lib') . DS . 'Queueit' . DS . 'KnownUser' . DS . 
 
 class Queueit_Knownuser_Model_Observer
 {
-	const MAGENTO_SDK_VERSION = "1.3.2";
+    const MAGENTO_SDK_VERSION = "1.3.3";
     /**
      * Temporary storage of the cookie value, easier for validation.
      *
@@ -21,17 +21,38 @@ class Queueit_Knownuser_Model_Observer
         if (!$helper->getIsEnabled() || !$helper->getCustomerId() || !$helper->getSecretKey()) {
             return;
         }
+        if ($this->isActionFromIntegrationInfoController($observer)) {
+            return;
+        }
 
         $action = $observer->getEvent()->getControllerAction();
         /** @var Mage_Core_Controller_Request_Http $request */
         $request = $action->getRequest();
         $this->handleRequest($request, $action);
-   
     }
 
-    private  function getPluginVersion()
+    /**
+     * @param Varien_Event_Observer $observer
+     * @return bool
+     */
+    private function isActionFromIntegrationInfoController($observer)
     {
-        return '&kupver=magento1_'.Queueit_Knownuser_Model_Observer::MAGENTO_SDK_VERSION;
+        /** @var Varien_Event $event */
+        $event = $observer->getEvent();
+        if ($event == null) {
+            return false;
+        }
+        $action = $event->getControllerAction();
+        if ($action == null) {
+            return false;
+        }
+
+        return $action instanceof Queueit_Knownuser_IntegrationinfoController;
+    }
+
+    private function getPluginVersion()
+    {
+        return '&kupver=magento1_' . Queueit_Knownuser_Model_Observer::MAGENTO_SDK_VERSION;
     }
 
     /**
@@ -46,7 +67,7 @@ class Queueit_Knownuser_Model_Observer
 
         try {
             $fullUrl = $this->getCurrentUrl();
-            $currentUrlWithoutQueueitToken =  preg_replace ( "/([\\?&])(" ."queueittoken". "=[^&]*)/i" , "" ,  $fullUrl);
+            $currentUrlWithoutQueueitToken = preg_replace("/([\\?&])(" . "queueittoken" . "=[^&]*)/i", "", $fullUrl);
 
             $result = \QueueIT\KnownUserV3\SDK\KnownUser::validateRequestByIntegrationConfig(
                 $currentUrlWithoutQueueitToken,
@@ -57,23 +78,20 @@ class Queueit_Knownuser_Model_Observer
             );
 
             if ($result->doRedirect()) {
-                    $response = $action->getResponse();
-                    if(!$result->isAjaxResult)
-                    {
-                        $response->setRedirect($result->redirectUrl. $this->getPluginVersion());
-                    }
-                    else
-                    {
-                        $response->setHeader('HTTP/1.0', 200, true);
-                        $response->setHeader($result->getAjaxQueueRedirectHeaderKey() , $result->getAjaxRedirectUrl(). urlencode($this->getPluginVersion()));
-                    }
-                 
-                    $response->setHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
-                    $response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
-                    $response->setHeader('Pragma', 'no-cache');
-                    $action->setFlag('', $action::FLAG_NO_DISPATCH, true);
-                    $request->setDispatched(true);
-                    return;
+                $response = $action->getResponse();
+                if (!$result->isAjaxResult) {
+                    $response->setRedirect($result->redirectUrl . $this->getPluginVersion());
+                } else {
+                    $response->setHeader('HTTP/1.0', 200, true);
+                    $response->setHeader($result->getAjaxQueueRedirectHeaderKey(), $result->getAjaxRedirectUrl() . urlencode($this->getPluginVersion()));
+                }
+
+                $response->setHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
+                $response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+                $response->setHeader('Pragma', 'no-cache');
+                $action->setFlag('', $action::FLAG_NO_DISPATCH, true);
+                $request->setDispatched(true);
+                return;
             }
 
 
@@ -88,13 +106,10 @@ class Queueit_Knownuser_Model_Observer
             }
 
 
-
         } catch (Exception $e) {
             Mage::logException($e);
         }
     }
-
-
 
 
     /**
@@ -128,7 +143,6 @@ class Queueit_Knownuser_Model_Observer
     }
 
 
-
     /**
      * @return Queueit_Knownuser_Helper_Data
      */
@@ -136,8 +150,6 @@ class Queueit_Knownuser_Model_Observer
     {
         return Mage::helper('queueit_knownuser');
     }
-
-
 
 
     /**

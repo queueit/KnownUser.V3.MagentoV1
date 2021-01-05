@@ -14,7 +14,7 @@ class Queueit_Knownuser_IntegrationinfoController extends Mage_Core_Controller_F
 
             if ($integrationInfo && $hash && $this->getHelper()->validateHash($integrationInfo, $hash)) {
                 $helper = Mage::helper('queueit_knownuser');
-                $configText = $helper->updateIntegrationInfo($integrationInfo, $hash);
+                $helper->updateIntegrationInfo($integrationInfo, $hash);
                 $this->getResponse()->setHeader('HTTP/1.0', 200, true);
 
                 return;
